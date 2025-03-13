@@ -41,11 +41,9 @@ class FixedPointIter:
         if self.a >= self.b:
             return 0
         
-        # Ensure f(X) f(x) has value on interval [a, b]
+        # Ensure f(X) has value on interval [a, b]
         min_f, max_f = self.find_min_max(self.f, self.a, self.b)
         if (min_f <= self.a) or (max_f >= self.b): return 0
-
-
 
         # Ensure |f'(x)| < 1 for all x in [a, b]
         q = self.find_max_abs_gradf()
