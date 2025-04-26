@@ -84,7 +84,7 @@ class FixedPointIter:
             return 0
         
         # initialize parameters:
-        x_0 = self.a
+        x_0 = self.x_0
         q = self.find_max_abs_gradf()
         
         print(f"Initialization: x = {x_0}")
