@@ -50,6 +50,7 @@ class GaussSeidel:
                 if phi < sum_low / (self.A[i][i] - sum_up):
                     phi = sum_low / (self.A[i][i] - sum_up)
             print ("phi = ", phi)
+            
         elif self.col_diagonally_dominant():
             print ("Matrix A is column diagonally dominant")
             p = 1

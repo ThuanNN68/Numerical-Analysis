@@ -34,17 +34,6 @@ class Jacobi:
         # Check if the matrix is diagonally dominant
         if not self.row_diagonally_dominant() and not self.col_diagonally_dominant():
             raise ValueError("Matrix A is not diagonally dominant")
-        
-        # Check input
-        if not isinstance(self.A, np.ndarray) or not isinstance(self.b, np.ndarray):
-            raise ValueError("A and b must be numpy arrays")
-        if self.A.shape[0] != self.A.shape[1]:
-            raise ValueError("Matrix A must be square")
-        if self.A.shape[0] != self.b.shape[0]:
-            raise ValueError("Matrix A and vector b dimensions do not match")
-        if len(self.x0) != self.A.shape[0]:
-            raise ValueError("Initial guess x0 must have the same dimension as A")
-        
         # Find dianogal matrix T
         diag_elements = np.diag(self.A)
         T = np.diag(diag_elements)
@@ -91,10 +80,10 @@ class Jacobi:
         return None, None
 
 # Example usage:
-A = np.array([[10, 2, -3], [1, 15, 5], [3, -4, 20]], dtype=float)
-b = np.array([1, 2, 3], dtype=float)
-x0 = np.array([0.5, -0.2, 0.3])
-
+A = np.array([[15, -2, -4, 2], [3, 15, -8, 3], [2, 4, 15, -5], [3, -2, 1, 8]], dtype=float)
+b = np.array([3, 5, 7, -4], dtype=float)
+x0 = np.array([1, 1, 1, 1], dtype=float)
+p = 1
 problem = Jacobi(A, b, x0, 1e-6)
 
 x, err = problem.solve()
