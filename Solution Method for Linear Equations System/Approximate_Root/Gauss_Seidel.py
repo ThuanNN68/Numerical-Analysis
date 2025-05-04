@@ -75,6 +75,7 @@ class GaussSeidel:
         x1 = np.zeros(self.n)
         iter = 1
         k_err = phi / ((1 - phi) * (1 - s))
+
         while iter <= 1000:
             for i in range(self.n):
                 sum1 = sum(self.A[i][j] * x1[j] for j in range(0, i))
