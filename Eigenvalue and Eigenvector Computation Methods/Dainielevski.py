@@ -172,19 +172,25 @@ class Danielevsky:
         eigenvalue = self.findvalue(final_block)
 
         print(f"Processing final block of size {t}x{t}", np.round(final_block, 6))
-        print(f"Eigenvalues of final block", np.round(eigenvalue, 6))
+        print(f"Final block matrix:\n{np.round(final_block, 6)}")
+        print(f"Eigenvalues of final block:\n{np.round(eigenvalue, 6)}")
 
         for j in range(len(eigenvalue)):
             eigenvalues.append(eigenvalue[j])
             # For Frobenius form, eigenvector components are powers of eigenvalue
             y = np.power(eigenvalue[j], np.arange(t))[::-1].reshape((t, 1))
             v = np.zeros((self.n, 1))
-            v[k:m] = y
+            v[0:t] = y  # For final block, we start from index 0
+            print(f"Eigenvector before transformation:\n{np.round(v, 6)}")
             eigenvectors.append(v)
-            print(f"Eigenvector after back transformation", np.round(v, 6))
+
+        # Apply back transformation and normalize eigenvectors
         for i in range(len(eigenvectors)):
-            eigenvectors[i] = back_transform @ eigenvectors[i]
-            eigenvectors[i] = eigenvectors[i] / np.linalg.norm(eigenvectors[i])
+            v_transformed = back_transform @ eigenvectors[i]
+            v_normalized = v_transformed / np.linalg.norm(v_transformed)
+            eigenvectors[i] = v_normalized
+            print(f"Eigenvector after transformation and normalization:\n{np.round(eigenvectors[i], 6)}")
+
         return eigenvalues, eigenvectors
     
     def check_eigenvalues(self, eigenvalues, eigenvectors):
